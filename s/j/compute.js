@@ -1,0 +1,1 @@
+define({add:function(a,b){alert(a+b);}});

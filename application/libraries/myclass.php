@@ -1,0 +1,1 @@
+<?php	class myclass {				public function hey(){			echo 'hey';		}			}?>
