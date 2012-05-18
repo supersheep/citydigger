@@ -1,6 +1,9 @@
-<?=$error;?>
-<form action="/index.php/login" method="post">
-	<label for="email">邮箱：</label><input type="text" id="email" name="email" />
-	<label for="pwd">密码：</label><input type="password" id="pwd" name="password" />
-	<input type="submit" value="提交" />
+
+<form action="/login" method="post" id="form">
+	<?php if(isset($error)):?>
+	<div class="row error"><?=$error;?></div>
+	<?php endif; ?>
+	<div class="row"><input type="text" id="email" name="email" placeholder="email" /></div>
+	<div class="row"><input type="password" id="pwd" name="password" placeholder="password"/></div>
+	<div class="row"><input type="submit" value="提交" /></div>
 </form>

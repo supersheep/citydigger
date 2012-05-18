@@ -8,26 +8,26 @@ class Brain extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('user');
 		//$this->load->helper('cookie');
-		$this->data['logged'] = $this->user->logged();
+		$logged = $this->user->logged();
+		$this->data['logged'] = $logged;
 		
-		$email = $this->input->post('email');
-		$pwd = $this->input->post('password');
+		$this->data['title'] = 'CityDigger';
+			
+		if($logged){
 		
-		$login = $this->user->login($email,$pwd);
-		if($login == 1){
-			redirect('/');
-		}else if($login == 2){
-			redirect('user/info');
-		}else if($this->input->post()){
-			$this->data['error'] = "用户不存在或密码错误";
+			$current = $this->user->current();
+			
+			$this->data['username'] = $current->username;
+			
+			$this->load->view('frag/header',$this->data);
+			$this->load->view('pages/brain',$this->data);
+			
 		}else{
-			$this->data['error'] = "";
+		
+			$this->load->view('frag/header',$this->data);
+			$this->load->view('pages/login',$this->data);
+			
 		}
-		
-		$this->data['title'] = "登录";
-		
-		$this->load->view('frag/header',$this->data);
-		$this->load->view('pages/brain',$this->data);
 	}
 }
 	

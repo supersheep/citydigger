@@ -12,19 +12,16 @@ class Login extends CI_Controller {
 		
 		$email = $this->input->post('email');
 		$pwd = $this->input->post('password');
+		$this->data['username'] = $this->user->current()->username;
 		
-		$login = $this->user->login($email,$pwd);
-		if($login == 1){
+		//　若登录成功
+		if($this->user->login($email,$pwd)){
 			redirect('/');
-		}else if($login == 2){
-			redirect('user/info');
 		}else if($this->input->post()){
 			$this->data['error'] = "用户不存在或密码错误";
-		}else{
-			$this->data['error'] = "";
 		}
 		
-		$this->data['title'] = "登录";
+		$this->data['title'] = "CityDigger - Login";
 		
 		$this->load->view('frag/header',$this->data);
 		$this->load->view('pages/login',$this->data);
