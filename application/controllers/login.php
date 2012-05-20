@@ -8,17 +8,32 @@ class Login extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('user');
 		//$this->load->helper('cookie');
-		$this->data['logged'] = $this->user->logged();
+		$logged = $this->user->logged();
+		$this->data['logged'] = $logged;
 		
 		$email = $this->input->post('email');
-		$pwd = $this->input->post('password');
-		$this->data['username'] = $this->user->current()->username;
+		$password = $this->input->post('password');
+		
+		
 		
 		//　若登录成功
-		if($this->user->login($email,$pwd)){
-			redirect('/');
-		}else if($this->input->post()){
-			$this->data['error'] = "用户不存在或密码错误";
+		
+		if(isset($email) && isset($password)){
+		
+			
+			$login = $this->user->login($email,$password);
+		
+			if($login == 1 || $logged){
+				redirect('/');
+			}else{
+				
+				if($login == -1){
+					$this->data['error'] = "Email doesn't exist";
+				}else if($login == -2){
+					$this->data['error'] = "Password error";
+				}
+				
+			}
 		}
 		
 		$this->data['title'] = "CityDigger - Login";

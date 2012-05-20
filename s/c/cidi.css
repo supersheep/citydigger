@@ -1,5 +1,5 @@
 #form{}
 #form .error{padding:8px;border:1px solid #e66;border-radius: 10px;background:#ecc;color:#e66;}
 #form .row{margin:10px;}
-#form input{height:40px;width:288px;line-height:24px;font-size:18px;padding:5px;border-radius:15px;display: block;}
-#form input[type=submit]{width:296px;}
+#form input{height:35px;width:276px;line-height:18px;font-size:18px;padding:5px 10px;border-radius:15px;display: block;}
+#form input[type=submit]{width:296px;height:40px;}

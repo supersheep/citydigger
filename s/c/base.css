@@ -6,13 +6,15 @@ a{text-decoration:none;}
 body{background-color:#f9f9f9;background-image:url('i/pattern.png');}
 img{border:none;}
 
-
 select{background-color:#4f4f4f;color:#e5e5e5;padding:3px;width:150px;height:25px;font-size:12px;}
 
 .box{box-shadow: 0 0 8px rgba(0,0,0,0.1);}
 .clearfix:after{content:'';display:block;clear:both;}
 
+.input-text{box-shadow:inset 2px 2px 2px rgba(0, 0, 0, 0.1);border:1px solid #ccc;}
+.input-text:focus{outline: 0; -webkit-box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);}
 
+.btn-sure{background-image:-webkit-linear-gradient(top, #08C, #05C);border:1px solid #ccc;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#fff;}
 
 
 /* header */

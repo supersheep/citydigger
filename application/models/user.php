@@ -16,9 +16,12 @@ class User extends CI_Model{
 	
 	function logged(){
 		$this->load->database();
+		$this->load->helper('cookie');
 		$this->load->library('user_agent');
+		
 		$session = $this->input->cookie($this->cookie_name);
 		$email = $this->input->cookie($this->cookie_email);
+		
 		$ua = $this->agent->browser().' '.$this->agent->version();
 		$ip = $this->input->ip_address();
 		$encrypt = $this->config->item('session_encrypt_code');
@@ -37,6 +40,8 @@ class User extends CI_Model{
 			}
 			
 		}else{
+			delete_cookie($this->cookie_name);
+			delete_cookie($this->cookie_email);
 			return false;
 			
 		}
@@ -64,39 +69,54 @@ class User extends CI_Model{
 		$this->load->database();
 		
 		$query = $this->db->select()->from($this->table_name)
-			->where('email',$email)->where('password',md5($password))->get();
-			
-		// 用户存在		
-		if($query->num_rows()>0){
-			// write session and cookie 
-			$ua = $this->agent->browser().' '.$this->agent->version();
-			$ip =  $this->input->ip_address();
-			$encrypt = $this->config->item('session_encrypt_code');
-			$session = md5($email.$ua.$ip.$encrypt);
-			
-			$session_query = $this->db->select()->from($this->session_table)->where('session',$session)->get();
-			
-			// session不存在则存之
-			if($session_query->num_rows == 0){
-				
-				$this->db->insert($this->session_table,array(
-					'email' => $email,
-					'session'=> $session,
-					'ua' => $ua,
-					'ip' => $ip
-				));
-				// save cookie of session to local
-				$expire = time()+60*60*24*30;
-				$this->input->set_cookie($this->cookie_name,$session,$expire);
-				$this->input->set_cookie($this->cookie_email,$email,$expire);
-			}
-			
-			// 返回成功
-			return true;
-		}else{
-			// 返回失败
-			return 0;
+			->where('email',$email)->get();
+		
+		$password = md5($password);
+		
+		$rows_count = $query->num_rows();
+		$row = $query->row();
+		
+		
+		if($rows_count == 0){
+			// user not exists
+			return -1;
 		}
+		
+		//$password;
+		if($row->password != $password){
+			// password error
+			return -2;
+		}
+		
+		
+		// or if user exists
+		
+		// write session and cookie 
+		$ua = $this->agent->browser().' '.$this->agent->version();
+		$ip =  $this->input->ip_address();
+		$encrypt = $this->config->item('session_encrypt_code');
+		$session = md5($email.$ua.$ip.$encrypt);
+		
+		$session_query = $this->db->select()->from($this->session_table)->where('session',$session)->get();
+		
+		// session不存在则存之
+		if($session_query->num_rows == 0){
+			
+			$this->db->insert($this->session_table,array(
+				'email' => $email,
+				'session'=> $session,
+				'ua' => $ua,
+				'ip' => $ip
+			));
+			// save cookie of session to local
+			$expire = time()+60*60*24*30;
+			$this->input->set_cookie($this->cookie_name,$session,$expire);
+			$this->input->set_cookie($this->cookie_email,$email,$expire);
+		}
+		
+		// 返回成功
+		return 1;
+			
 	}
 	
 	
