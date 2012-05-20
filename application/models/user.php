@@ -128,6 +128,36 @@ class User extends CI_Model{
 			
 	}
 	
+	private function filterResult($result){
+		$ret = array();
+		
+		foreach($result as $row){
+			$ret[] = array(
+				'id'=>$row->id,
+				'username'=>$row->username,
+				'avatar'=>$this->getGravatarByEmail($row->email)
+			);
+		}
+		
+		return $ret;
+		
+	}
+	
+	function search($keyword,$from,$to){
+		$this->load->database();
+		$like = $this->db->escape_like_str($keyword);
+		$start = $from-1;
+		$num = $to-$from+1;
+		
+		
+		if($start<10){$start = 0;}
+		if($num>10){$num = 10;}
+		if($num<0){$num = 0;}
+		
+			
+		$query = $this->db->like('username',$like)->get($this->table_name,$num,$start);
+		return $this->filterResult($query->result());
+	}
 	
 	function name_exists($username){
 		$query = $this->db
