@@ -11,6 +11,7 @@ class Login extends CI_Controller {
 		$logged = $this->user->logged();
 		$this->data['logged'] = $logged;
 		
+		$post = $this->input->post();
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		
@@ -18,9 +19,8 @@ class Login extends CI_Controller {
 		
 		//　若登录成功
 		
-		if(isset($email) && isset($password)){
+		if($email && $password){
 		
-			
 			$login = $this->user->login($email,$password);
 		
 			if($login == 1 || $logged){
@@ -34,8 +34,12 @@ class Login extends CI_Controller {
 				}
 				
 			}
+		}else if($post && !$email){
+			$this->data['error'] = "Please enter email";
+		}else if($post && !password){
+			$this->data['error'] = "Please enter password";
 		}
-		
+				
 		$this->data['title'] = "CityDigger - Login";
 		
 		$this->load->view('frag/header',$this->data);

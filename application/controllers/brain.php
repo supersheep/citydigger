@@ -18,6 +18,7 @@ class Brain extends CI_Controller {
 			$current = $this->user->current();
 			
 			$this->data['username'] = $current->username;
+			$this->data['avatar'] = $current->avatar;
 			
 			$this->load->view('frag/header',$this->data);
 			$this->load->view('pages/brain',$this->data);

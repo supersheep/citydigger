@@ -48,6 +48,11 @@ class User extends CI_Model{
 		
 	}
 	
+	private function getGravatarByEmail($mail){
+		return "http://www.gravatar.com/avatar/".md5($mail);
+	}
+	
+	
 	function current(){
 		$ua = $this->input->cookie($this->cookie_email);
 		if(!$ua){
@@ -55,7 +60,9 @@ class User extends CI_Model{
 		}else{
 			$this->load->database();
 			$query = $this->db->select()->from($this->table_name)->where('email',$ua)->get();
-			return $query->row();
+			$row = $query->row();
+			$row -> avatar = $this->getGravatarByEmail($row->email);
+			return $row;
 		}
 	}
 	
@@ -83,6 +90,8 @@ class User extends CI_Model{
 		}
 		
 		//$password;
+		
+		
 		if($row->password != $password){
 			// password error
 			return -2;

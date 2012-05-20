@@ -48,10 +48,10 @@ class Reg extends CI_Controller {
 		
 		$this->load->view('frag/header',$this->data);
 		
+		
 		if(!$this->valid()){
 			$this->load->view('pages/reg',$this->data);
-		}else{
-				
+		}else{	
 			$this->user->create(array(
 				'create_time'=> date("Y-m-d h:i:s"),
 				'username'=>$this->username,
@@ -64,12 +64,9 @@ class Reg extends CI_Controller {
 		
 	private function valid(){
 		
-		$this->data['showerror'] = 'hide';
-		
-		
-		if($this->input->post()){
-			$this->data['showerror']= '';
-		}			
+		if(!$this->input->post()){
+			return false;
+		}
 		
 		// 邮箱未输入
 		if(!$this->emailaddr){

@@ -28,9 +28,14 @@
 	<?php if($logged):
 	?>
 	<div class="hd-tools">
+		<div class="uname"><?=$username?><img src="<?=$avatar?>" /></div>
 		<div class="post"><input type="text" /></div>
-		<div class="uname"><?=$username?></div>
-		<div class="info">msg<small class="count">16</small></div>
+		<div class="msg">msg<small class="count">16</small></div>
+	</div>
+	<?php else:?>
+	<div class="hd-tools">
+		<div><a href="login">login</a></div>
+		<div><a href="reg">reg</a></div>
 	</div>
 	<?php endif;?>
 </div>

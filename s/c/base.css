@@ -1,6 +1,6 @@
 /* reset */
 
-body,div,h1,h2,h3,p,ul,ol,input,textarea{margin:0;padding:0;font-size:14px;font-family:'Microsoft Yahei';}
+body,div,h1,h2,h3,p,ul,ol,input,textarea{margin:0;padding:0;font-size:14px;font-family:"Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti;}
 ul,ol{list-style:none;}
 a{text-decoration:none;}
 body{background-color:#f9f9f9;background-image:url('i/pattern.png');}
@@ -30,9 +30,7 @@ select{background-color:#4f4f4f;color:#e5e5e5;padding:3px;width:150px;height:25p
 
 #hd .hd-tools{position:absolute;right:0;color:#fff;}
 #hd .hd-tools a{color:#fff;}
-#hd .hd-tools .post{float:left;margin-right:20px;}
-#hd .hd-tools .post input{border:1px solid #ccc;box-shadow:inset 0 1px 2px rgba(20,20,20,0.18);padding:0 3px;color:#333;border-radius:4px;}
-#hd .hd-tools .post input:focus{outline: none;box-shadow:inset 0 1px 2px rgba(20,20,20,0.18), 0 0 5px rgba(200,200,200,1);}
+#hd .hd-tools div{margin-right:15px;float:left;text-shadow:0 -1px 0 #666;}
 #hd .hd-tools .uname{float:left;margin-right:20px;}
 #hd .hd-tools .info{float:left;margin-right:20px;}
 #hd .hd-tools .login{float:left;margin-right:20px;}
