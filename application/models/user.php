@@ -49,7 +49,7 @@ class User extends CI_Model{
 	}
 	
 	private function getGravatarByEmail($mail){
-		return "http://www.gravatar.com/avatar/".md5($mail);
+		return "http://www.gravatar.com/avatar/".md5($mail)."?s=32&d=mm";
 	}
 	
 	

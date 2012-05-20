@@ -12,25 +12,16 @@
 </head>
 <body>
 <div id="hd">
-	<div class="hd-main">
-		<div class="avatar">
-			
-		<?php if($logged){
-		?>	
-			<img src="/s/i/dig_dug.png" alt="citydigger" />
-		<?php
-		}else{
-		?>
-			<img src="/s/i/dig_dug.png" alt="citydigger" />
-		<?php } ?>
-		</div>
+	<div class="logo">
+		<img src="/s/i/dig_dug.png" alt="citydigger" />
 	</div>
 	<?php if($logged):
 	?>
 	<div class="hd-tools">
-		<div class="uname"><?=$username?><img src="<?=$avatar?>" /></div>
-		<div class="post"><input type="text" /></div>
-		<div class="msg">msg<small class="count">16</small></div>
+		<div class="avatar"><img src="<?=$avatar?>" alt="<?=$username?>" title="<?=$username?>" /></div>
+		<div class="find icon"> </div>
+		<div class="at icon"> </div>
+		<div class="msg icon"><small class="count">16</small></div>
 	</div>
 	<?php else:?>
 	<div class="hd-tools">
