@@ -17,8 +17,10 @@ select{background-color:#4f4f4f;color:#e5e5e5;padding:3px;width:150px;height:25p
 .btn-sure{background-image:-webkit-linear-gradient(top, #08C, #05C);border:1px solid #ccc;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#fff;}
 
 
+.action-pannel{width:320px;height:440px;top:-440px;position:absolute;background: #fff;box-shadow:0 0 15px rgba(0, 0, 0, 0.6);}
+
 /* header */
-#hd{height:40px;line-height:40px;position:absolute;z-index:5;background-image:url('i/h-bar.png');box-shadow:0 0 15px 0 #444;position: relative;}
+#hd{height:40px;line-height:40px;position:absolute;z-index:5;background-image:url('i/h-bar.png');box-shadow:0 0 15px 0 rgba(0, 0, 0, 0.6);position: relative;}
 
 #hd img{width:32px;height:32px;border-radius:5px;display: block;}
 
