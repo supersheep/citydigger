@@ -49,6 +49,10 @@ select{background-color:#4f4f4f;color:#e5e5e5;padding:3px;width:150px;height:25p
 	margin-right: 10px;
 }
 
+.pannel-inner .list-cont{}
+.pannel-inner .list-cont .item{}
+.pannel-inner .list-cont .item img{float:left;}
+.pannel-inner .list-cont .item .name{float:left;}
 
 /* header */
 #hd{height:40px;line-height:40px;position:absolute;z-index:5;background-image:url('i/h-bar.png');box-shadow:0 0 15px 0 rgba(0, 0, 0, 0.6);position: relative;}

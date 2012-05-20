@@ -15,7 +15,6 @@ function ActionButton(button,template,callback){
 			duration:"1000",
 			easeing:"easein",
 			complete:function(){
-				callback.call(pannel);
 				current_pannel && current_pannel.remove();
 				current_pannel = pannel;
 			}

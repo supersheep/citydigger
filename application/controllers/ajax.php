@@ -43,7 +43,8 @@ class Ajax extends CI_Controller {
 	private function freshUser($from,$to){
 		
 		if($from!==false && $to!==false){
-			echo "dosth";
+			$result = $this->user->latest($from,$to);
+			$this->success($result);
 		}else{
 			$this->errorMsg("bad args");
 		}

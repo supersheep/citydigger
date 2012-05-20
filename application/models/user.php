@@ -48,8 +48,8 @@ class User extends CI_Model{
 		
 	}
 	
-	private function getGravatarByEmail($mail){
-		return "http://www.gravatar.com/avatar/".md5($mail)."?s=32&d=mm";
+	private function getGravatarByEmail($mail,$d="mm"){
+		return "http://www.gravatar.com/avatar/".md5($mail)."?s=32&d=".$d;
 	}
 	
 	
@@ -143,17 +143,38 @@ class User extends CI_Model{
 		
 	}
 	
-	function search($keyword,$from,$to){
-		$this->load->database();
-		$like = $this->db->escape_like_str($keyword);
-		$start = $from-1;
+	private function parseNum($from,$to){
 		$num = $to-$from+1;
 		
-		
-		if($start<10){$start = 0;}
 		if($num>10){$num = 10;}
 		if($num<0){$num = 0;}
 		
+		return $num;
+	}
+	
+	private function parseStart($from){
+		$start = $from - 1;
+		if($start<0){$start = 0;}
+		return $start;	
+	}
+	
+	
+	function latest($from,$to){
+		$this->load->database();
+		$start = $this->parseStart($from);
+		$num = $this->parseNum($from,$to);
+			
+		$query = $this->db->order_by('create_time','desc')->get($this->table_name,$num,$start);
+		return $this->filterResult($query->result());
+	}
+	
+	
+	function search($keyword,$from,$to){
+		$this->load->database();
+		$like = $this->db->escape_like_str($keyword);
+		
+		$start = $this->parseStart($from);
+		$num = $this->parseNum($from,$to);
 			
 		$query = $this->db->like('username',$like)->get($this->table_name,$num,$start);
 		return $this->filterResult($query->result());
