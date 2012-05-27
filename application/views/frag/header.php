@@ -19,9 +19,16 @@
 	?>
 	<div class="hd-tools">
 		<div class="avatar"><img src="<?=$avatar?>" alt="<?=$username?>" title="<?=$username?>" /></div>
-		<div class="find icon"> </div>
+		<!--div class="find icon"> </div-->
 		<div class="at icon"> </div>
-		<div class="msg icon"><small class="count">16</small></div>
+		<div class="msg icon">
+		<?php if($msgcount):
+		?>
+			<small class="count"><?=$msgcount;?></small>
+		<?php
+			endif;
+		?>	
+		</div>
 	</div>
 	<?php else:?>
 	<div class="hd-tools">

@@ -158,6 +158,16 @@ class User extends CI_Model{
 		return $start;	
 	}
 	
+	function getById($id){
+		$query = $this->db->where(array('id'=>$id))->get($this->table_name);
+		$result = $this->filterResult($query->result());
+		
+		if(count($result)){
+			return $result[0];
+		}else{
+			return NULL;
+		}
+	}
 	
 	function latest($from,$to){
 		$this->load->database();
