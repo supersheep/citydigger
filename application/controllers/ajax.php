@@ -86,14 +86,27 @@ class Ajax extends CI_Controller {
 	private function latestpost(){
 		$this->load->model('post');
 		$this->load->model('user');
-		$num = $this->input->get('num')?$this->input->get('num'):5;
-		$ret = array();
+		$this->load->database();
 		
-		$posts = $this->post->latest($num);
+		$ret = array();
+		$num = $this->input->get('num')?$this->input->get('num'):5;
+		
+		$query = $this->db->select(array('userid','content','latlng'))
+						->select_max('id','max_id')
+						->group_by('userid')
+						->order_by('max_id')
+						->get('cidi_post',$num);
+						
+		$posts = $query->result();
+		
 		foreach($posts as $post){
 			$ret[] = array(
 				'user' => $this->user->getById($post->userid),
-				'post' => $post
+				'post' => array(
+					"content"=>$post->content,
+					"latlng"=>$post->latlng,
+					"userid"=>$post->userid
+				)
 			);
 		}
 		
