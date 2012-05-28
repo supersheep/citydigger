@@ -1,8 +1,8 @@
 <?php
 class Mention extends CI_Model{
 	
-    const UNCHECKED = 'unchecked';
-    
+    const UNREAD = 'unread';
+    const READ = 'read';
 	private $table_name = 'cidi_mention';
 	
 	
@@ -16,19 +16,32 @@ class Mention extends CI_Model{
 	
 	}
 	
-	function unread($userid){
-		$query = $query = $this->db->where(array(
+	function unreads($userid){
+		$query = $this->db->where(array(
 			'to_user_id'=>$userid,
-			'status' => self::UNCHECKED
+			'status' => self::UNREAD
 		))->get($this->table_name);
 		
 		return $query->result();
 	}
 	
+	function read($id){
+		$this->db->where(array(
+			'id'=>$id
+		))->update($this->table_name,array(
+			'status'=>self::READ	
+		));
+		if($this->db->affected_rows()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	function count($userid){
 		$query = $this->db->where(array(
 			'to_user_id'=>$userid,
-			'status' => self::UNCHECKED
+			'status' => self::UNREAD
 		))->get($this->table_name);
 		
 		return $query->num_rows();

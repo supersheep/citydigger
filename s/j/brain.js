@@ -28,8 +28,9 @@ data.forEach(function(item){
 	
 	li.append($('<img class="avatar" />').attr('src',user.avatar).attr('title',user.username));
 	li.append($('<p />').html(user.username + ' just found a nice place'));
-	li.append($('<p class="btn-sure" />').html('have a look'))
+	li.append($('<p class="btn-sure" />').html('have a look'));
 	li.data('post',item.post);
+	li.data('mention',item.mention);
 	ul.append(li);
 });
 }
@@ -187,12 +188,18 @@ var atPannel = new ActionButton("s/tpl/at.html",function(){
 var msgPannel = new ActionButton("s/tpl/msg.html",function(){
 	var elem = this,
 		list = elem.find('.list-cont');
-	fetchResult('ajax/mentions/unread',{},list,renderMentionsList);
+	fetchResult('ajax/mentions/unreads',{},list,renderMentionsList);
 	list.delegate('.item','click',function(){
-		var post = $(this).data('post');
+		var li = $(this),
+			post = li.data('post'),
+			mention = li.data('mention');
+			
 		msgPannel.close();
 		msgCount(msgCount.current() - 1);	
-		console.log();
+		$.ajax({
+			url:'ajax/mentions/read',
+			data:{id:mention}
+		});
 		$.ajax({
 			url:'ajax/post/get',
 			data:{id:post},

@@ -30,13 +30,23 @@ class Ajax extends CI_Controller {
 	
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
 		
-		if($type == "unread"){
+		if($type == "unreads"){
 			$this->unreadMentions();
-		}else if($type == "check"){
-			//$this->check
+		}else if($type == "read"){
+			$this->readMentions();
 		}
 	}
 	
+	private function readMentions(){
+		$this->load->model('mention');
+		
+		$id = $this->input->get('id');
+		if($this->mention->read($id)){
+			$this->success('ok');
+		}else{
+			$this->errorMsg('some thing wrong');
+		};
+	}
 	
 	private function unreadMentions(){
 		
@@ -44,14 +54,15 @@ class Ajax extends CI_Controller {
 		$this->load->model('post');
 		$this->load->model('user');
 		
-		$mentions = $this->mention->unread($this->user->current()->id);
+		$mentions = $this->mention->unreads($this->user->current()->id);
 		$ret = array();
 		// maybe need to specify the context_type one day;
 		foreach($mentions as $mention){
 			$post = $this->post->getById($mention->context_id);
 			$ret[] = array(
 				'user' => $this->user->getById($post->userid),
-				'post' => $mention->context_id 
+				'post' => $mention->context_id,
+				'mention' => $mention->id
 			);
 		}
 		
