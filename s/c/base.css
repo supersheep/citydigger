@@ -163,11 +163,17 @@ select{background-color:#4f4f4f;color:#e5e5e5;padding:3px;width:150px;height:25p
 #hd .hd-tools .avatar{border-radius:5px;margin: 4px;}
 #hd .hd-tools a{color:#fff;}
 #hd .hd-tools div{float:left;text-shadow:0 -1px 0 #666;}
-#hd .hd-tools .icon{width:32px;height:32px;position:relative;margin:4px;background-repeat:no-repeat;background-position: center center;}
+#hd .hd-tools .icon{width:32px;height:32px;position:relative;margin:4px;background-repeat:no-repeat;background-position: center center;display: block;float:left;}
+
+
+#hd .hd-tools .txt{margin-right:10px;}
 
 #hd .hd-tools .at{background-image: url('i/at.png');}
 #hd .hd-tools .find{background-image: url('i/find.png');}
-#hd .hd-tools .msg{background-image: url('i/msg.png');margin-right:10px;}
+#hd .hd-tools .msg{background-image: url('i/msg.png');}
+#hd .hd-tools .eject{background-image: url('i/eject.png');margin-right:10px;}
+
+
 #hd .hd-tools .msg small{color:#fff;background:#e43;padding: 2px;border-radius:3px;position:absolute;right:0;bottom: 0;height: 12px;line-height: 12px;}
 
 /* end of header */

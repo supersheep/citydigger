@@ -66,6 +66,22 @@ class User extends CI_Model{
 		}
 	}
 	
+	function logout(){
+		$this->load->helper('cookie');
+		$this->load->database();
+		$session = $this->input->cookie('cidiu');
+		delete_cookie('cidiu');
+		delete_cookie('email');
+		$this->db->delete($this->session_table,array(
+			'session'=>$session
+		));
+		if($this->db->affected_rows() == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	// return status
 	// 0: failed
 	// 1: succeeded

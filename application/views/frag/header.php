@@ -29,11 +29,12 @@
 			endif;
 		?>	
 		</div>
+		<a  href="/logout" class="eject icon"></a>
 	</div>
 	<?php else:?>
 	<div class="hd-tools">
-		<div><a href="login">login</a></div>
-		<div><a href="reg">reg</a></div>
+		<div class="txt"><a href="login">login</a></div>
+		<div class="txt"><a href="reg">reg</a></div>
 	</div>
 	<?php endif;?>
 </div>
