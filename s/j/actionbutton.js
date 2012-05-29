@@ -5,6 +5,7 @@ function ActionButton(template,callback){
 	var self = this;
 	self.elem = $('<div />').addClass("action-pannel");
 	self.template = template;
+	self.name = template.match(/(\w+)\.html/)[1]
 	self.callback = callback;
 }
 
@@ -17,6 +18,7 @@ ActionButton.prototype.open = function(){
 	var succount = 2;
 	
 	self.opened = true;
+	
 	
 	function cb(){
 		succount--;
@@ -51,6 +53,9 @@ ActionButton.prototype.close = function(){
 	
 	this.opened = false;
 	
+	
+	
+	
 	pannel && pannel.animate({
 		"top":-440
 	},{
@@ -60,6 +65,7 @@ ActionButton.prototype.close = function(){
 			pannel.detach();
 		}
 	});
+	
 };
 
 

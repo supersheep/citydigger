@@ -50,10 +50,12 @@ select{background-color:#4f4f4f;color:#e5e5e5;padding:3px;width:150px;height:25p
 	margin-right: 14px;
 }
 
-.pannel-inner .list-cont{}
+.pannel-inner .list-cont{
+    padding: 10px 0;
+}
 .pannel-inner .list-cont .item{
     padding: 7px;
-    margin: 7px 0;
+    margin: 0 0 7px 0;
     background-color: #efefef;
 }
 .pannel-inner .list-cont .item img{

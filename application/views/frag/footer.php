@@ -1,4 +1,7 @@
 <script type="text/javascript">
+var cidiga=function(key){_gaq.push(['_trackPageview', key||''])}
+</script>
+<script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-32193848-1']);

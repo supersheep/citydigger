@@ -6,22 +6,26 @@ window.mapLay = new MapLay("#map_container");
 function renderUserList(list,data){
 var ul = $('<ul />');
 list.empty();
-list.append(ul);
-data.forEach(function(item){
-	var li = $('<li class="item clearfix" />');
-	
-	li.append($('<img class="avatar" />').attr('src',item.avatar));
-	li.append($('<p class="name" />').html(item.username));
-	li.data('data',item);
-	ul.append(li);
-});
+if(data.length){
+	list.append(ul);
+	data.forEach(function(item){
+		var li = $('<li class="item clearfix" />');
+		
+		li.append($('<img class="avatar" />').attr('src',item.avatar));
+		li.append($('<p class="name" />').html(item.username));
+		li.data('data',item);
+		ul.append(li);
+	});
+}else{
+	list.html("no one match the name, plz check and try again");
+}
 }
 
 function renderMentionsList(list,data){
 var ul = $('<ul />');
 list.empty();
+if(data.length){
 list.append(ul);
-
 data.forEach(function(item){
 	var li = $('<li class="item clearfix" />');
 	var user = item.user;
@@ -33,6 +37,9 @@ data.forEach(function(item){
 	li.data('mention',item.mention);
 	ul.append(li);
 });
+}else{
+	list.html("all messages has been read :)");
+}
 }
 
 // fetch result from ajax/user/search
@@ -91,6 +98,7 @@ var memberPicker = new ActionButton('s/tpl/find.html',function(){
 	
 	search_btn.click(function(){
 		var v = search_input.val();
+		cidiga('search_member');
 		v && fetchResult('ajax/user/search',{
 			from:1,
 			to:10,
@@ -98,7 +106,10 @@ var memberPicker = new ActionButton('s/tpl/find.html',function(){
 		},list,renderUserList);
 	});
 	
+	
 	list.delegate('.item','click',function(){
+		
+		cidiga("pick_one_to_at");
 		memberPicker.elem.trigger("pick",$(this).data('data'));
 		memberPicker.close();
 	});
@@ -141,6 +152,7 @@ var atPannel = new ActionButton("s/tpl/at.html",function(){
 	}
 	
 	at_btn.click(function(){
+		cidiga("post_at");
 		memberPicker.open();
 	});
 	
@@ -150,6 +162,7 @@ var atPannel = new ActionButton("s/tpl/at.html",function(){
 			latlng = mapLay.latlng.map(function(n){return n.toFixed(4)}).join(','),
 			mentions = member_arr.join(',');
 		
+		cidiga("post_sure");
 		$.ajax({
 			type:'post',
 			url:'ajax/post/add',
@@ -171,6 +184,7 @@ var atPannel = new ActionButton("s/tpl/at.html",function(){
 	});
 	
 	cancel_btn.click(function(){
+		cidiga('post_cancel');
 		atPannel.close();
 	});
 	
@@ -194,6 +208,7 @@ var msgPannel = new ActionButton("s/tpl/msg.html",function(){
 			post = li.data('post'),
 			mention = li.data('mention');
 			
+		cidiga("msg_click");
 		msgPannel.close();
 		msgCount(msgCount.current() - 1);	
 		$.ajax({
@@ -223,17 +238,20 @@ $('.at').click(function(){
 	msgPannel.close();
 	memberPicker.close();
 	atPannel.toggle();
+	cidiga("at_click");
 })
 
 $('.msg').click(function(){
 	atPannel.close();
 	msgPannel.toggle();
+	cidiga("msg_click");
 });
 
 // 点击logo关闭所有浮层
 $(".logo").click(function(){
 	atPannel.close();
 	msgPannel.close();
+	cidiga("logo_click");
 });
 
 
