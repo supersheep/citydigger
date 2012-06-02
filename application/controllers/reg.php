@@ -33,7 +33,7 @@ class Reg extends CI_Controller {
 		$this->load->model('user');
 		
 		
-		$this->data['title'] = "Sign up";
+		$this->data['title'] = $this->config->item('sitename')." - Sign up";
 		$this->data['logged'] = $this->user->logged();
 		
 		

@@ -40,7 +40,7 @@ class Login extends CI_Controller {
 			$this->data['error'] = "Please enter password";
 		}
 				
-		$this->data['title'] = "CityDigger - Login";
+		$this->data['title'] = $this->config->item('sitename'). " - Login";
 		
 		$this->load->view('frag/header',$this->data);
 		$this->load->view('pages/login',$this->data);

@@ -13,7 +13,7 @@
 <body>
 <div id="hd">
 	<div class="logo">
-		<img src="/s/i/dig_dug.png" alt="citydigger" />
+		<img src="/s/i/cityeye.jpg" alt="cityeye" />
 	</div>
 	<?php if($logged):
 	?>

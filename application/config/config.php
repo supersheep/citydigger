@@ -9,7 +9,7 @@
 |
 */
 $config['default_avatar'] = '/s/icon/u_default.png';
-
+$config['sitename'] = 'CityEye';
 
 
 /*

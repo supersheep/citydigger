@@ -11,7 +11,7 @@ class Brain extends CI_Controller {
 		//$this->load->helper('cookie');
 		$logged = $this->user->logged();
 		$this->data['logged'] = $logged;
-		$this->data['title'] = 'CityDigger';
+		$this->data['title'] = $this->config->item('sitename');
 			
 		if($logged){
 		
